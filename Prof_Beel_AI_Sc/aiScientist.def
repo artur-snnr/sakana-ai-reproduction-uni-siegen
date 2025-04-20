@@ -1,0 +1,8 @@
+Bootstrap: docker
+From: t4646/ai-scientist:20240817
+
+# Update everything and install an editor so we can better poke around in the container (if needed)
+%post
+    apt-get -y update
+    apt-get -y upgrade
+    apt-get -y install neovim

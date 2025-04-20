@@ -1,0 +1,3 @@
+[submodule "data/AI-Scientist"]
+	path = data/AI-Scientist
+	url = https://github.com/ISG-Siegen/AI-Scientist.git
