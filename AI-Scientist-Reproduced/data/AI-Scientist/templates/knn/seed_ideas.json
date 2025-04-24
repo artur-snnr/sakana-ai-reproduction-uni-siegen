@@ -1,18 +1,20 @@
-[
-  {
-    "Name": "adaptive_learning_rates",
-    "Title": "Adaptive Learning Rates for Stochastic Gradient Descent",
-    "Experiment": "Investigate how adaptive learning rates (e.g., Adam, RMSprop) can reduce the training time and energy usage of SGD-based recommender systems.",
-    "Interestingness": 7,
-    "Feasibility": 8,
-    "Novelty": 5
-  },
-  {
-    "Name": "e_fold_cv",
-    "Title": "E-Fold Cross-Validation for Model Performance Estimation",
-    "Experiment": "Develop an alternative to k-fold cross-validation named e-fold cross-validation. Instead of a static k it uses an intelligently chosen or dynamically adjusted parameter e to optimize the number of folds and to minimize computational energy while maintaining reliable model performance estimates.",
-    "Interestingness": 8,
-    "Feasibility": 7,
-    "Novelty": 7
-  }
-]
+{
+    "task_description": "The attached code trains and evaluates the FunkSVD algorithm with stochastic gradient descent for recommender systems. Your goal is to find novel ways to optimize energy efficiency. "
+}
+
+{
+"Name": "adaptive_learning_rates",
+"Title": "Adaptive Learning Rates for Stochastic Gradient Descent",
+"Experiment": "Investigate how adaptive learning rates (e.g., Adam, RMSprop) can reduce the training time and energy usage of SGD-based recommender systems.",
+"Interestingness": 7,
+"Feasibility": 8,
+"Novelty": 5
+},
+{
+"Name": "e_fold_cv",
+"Title": "E-Fold Cross-Validation for Model Performance Estimation",
+"Experiment": "Develop an alternative to k-fold cross-validation named e-fold cross-validation. Instead of a static k it uses an intelligently chosen or dynamically adjusted parameter e to optimize the number of folds and to minimize computational energy while maintaining reliable model performance estimates.",
+"Interestingness": 8,
+"Feasibility": 7,
+"Novelty": 7
+}
