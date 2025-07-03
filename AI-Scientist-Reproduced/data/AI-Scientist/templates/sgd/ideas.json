@@ -15,96 +15,51 @@
         "Interestingness": 8,
         "Feasibility": 7,
         "Novelty": 6,
-        "novel": true
+        "novel": false
     },
     {
-        "Name": "factor_pruning_sgd",
-        "Title": "Factor Pruning in SGD for Energy-Efficient Matrix Factorization",
-        "Experiment": "Introduce a pruning mechanism to the SGD process, where factors with minimal contribution are selectively pruned every few epochs. Modify the update_parameters function to include a pruning step based on a threshold criterion to identify and remove unimportant factors. Make pruning frequency and threshold adjustable parameters. Evaluate the impact on model performance and energy efficiency. Start with a conservative threshold and adjust based on performance metrics.",
-        "Interestingness": 9,
-        "Feasibility": 7,
-        "Novelty": 8,
-        "novel": true
-    },
-    {
-        "Name": "dynamic_factor_adjustment",
-        "Title": "Dynamic Factor Adjustment in Matrix Factorization for Improved Energy Efficiency",
-        "Experiment": "Modify the update_parameters function to include logic for dynamically adjusting the number of latent factors for each user and item. Use a simpler heuristic, such as periodically evaluating performance and adjusting factors based on predefined thresholds for improvement or degradation in performance metrics. Ensure the number of factors does not drop below a minimum viable number to maintain model stability. Monitor the impact on model performance and energy efficiency.",
-        "Interestingness": 9,
-        "Feasibility": 7,
-        "Novelty": 8,
-        "novel": true
-    },
-    {
-        "Name": "green_metrics",
-        "Title": "Incorporating Green Metrics for Sustainable Recommender Systems",
-        "Experiment": "Modify the sgd function to include tracking of training time and memory usage as proxies for computational cost and energy consumption. Use these green metrics to guide the training process by dynamically adjusting parameters like learning rate and regularization rate to minimize resource usage. Include functions to measure and log these metrics at each epoch. Evaluate the trade-offs between model performance and sustainability metrics.",
-        "Interestingness": 10,
-        "Feasibility": 7,
-        "Novelty": 9,
-        "novel": true
-    },
-    {
-        "Name": "quantized_sgd",
-        "Title": "Quantization Techniques for Energy-Efficient SGD in Matrix Factorization",
-        "Experiment": "Implement quantization for bias vectors and factor matrices by converting them to lower precision formats such as 16-bit or 8-bit integers. Modify the update_parameters and predict functions to support quantized operations. Quantize parameters before updates and dequantize after updates. Include analysis of trade-offs between model performance (e.g., RMSE, MAE) and energy consumption (e.g., training time, memory usage). Measure and log energy metrics at each epoch.",
+        "Name": "sparsity_regularization",
+        "Title": "Sparsity-Inducing Regularization for Energy-Efficient Matrix Factorization",
+        "Experiment": "Introduce sparsity-inducing regularization techniques such as L1 regularization in the `update_parameters` function to enforce sparsity in the latent factors. Start with L1 regularization and compare the performance with the baseline model. If feasible, implement and test more advanced techniques like group lasso. Evaluate the impact on model performance (RMSE, MAE) and computational efficiency (training time, memory usage). Compare the results with the baseline model to assess any trade-offs between efficiency and accuracy.",
         "Interestingness": 9,
         "Feasibility": 8,
         "Novelty": 8,
         "novel": true
     },
     {
-        "Name": "time_aware_early_stopping",
-        "Title": "Time-Aware Early Stopping for Sustainable Recommender Systems",
-        "Experiment": "Modify the sgd function to include monitoring of training time at each epoch. Incorporate this metric into the early stopping criteria by defining a maximum allowable training time threshold. If the training time exceeds this threshold while the validation loss does not significantly improve, halt training. Use time.time() to log the required metrics. Evaluate the impact on model performance and energy efficiency by comparing against traditional early stopping methods.",
-        "Interestingness": 10,
-        "Feasibility": 8,
-        "Novelty": 8,
-        "novel": true
-    },
-    {
-        "Name": "interaction_priority_sgd",
-        "Title": "Interaction-Priority SGD for Energy-Efficient Matrix Factorization",
-        "Experiment": "Modify the update_parameters function to prioritize updating the latent factors of users and items based on their interaction frequency. Implement an additional preprocessing step to calculate the interaction frequency for each user and item by counting the number of interactions in the training data. Create a priority list by sorting users and items based on their interaction frequency. During each epoch, update the parameters of high-priority users and items more frequently, say, twice as often as low-priority ones. Evaluate the impact on model performance using validation loss, RMSE, and MAE, and measure energy efficiency using training time and memory usage. Compare these metrics with the original implementation to assess improvements.",
-        "Interestingness": 9,
-        "Feasibility": 7,
-        "Novelty": 8,
-        "novel": true
-    },
-    {
-        "Name": "micro_batching",
-        "Title": "Micro-Batching for Energy-Efficient Stochastic Gradient Descent in Matrix Factorization",
-        "Experiment": "Implement micro-batching in the update_parameters function. Accumulate gradients for a set of interactions based on a defined batch size and update parameters once after processing the entire micro-batch. Modify the main sgd loop to process interactions in these micro-batches. Introduce a batch size parameter for flexibility. Evaluate the impact on model performance using validation loss, RMSE, and MAE, and measure energy efficiency using training time and memory usage. Log energy metrics before and after implementing micro-batching for comparison.",
+        "Name": "adaptive_early_stopping",
+        "Title": "Adaptive Early Stopping for Energy-Efficient Matrix Factorization",
+        "Experiment": "Enhance the early stopping mechanism by incorporating an adaptive approach that considers the rate of change in validation loss over multiple epochs. Modify the `sgd` function to include this adaptive early stopping criterion. Specifically, implement a moving average of the validation loss improvement over a window of epochs (e.g., 5 epochs), and stop training if this average improvement falls below a predefined threshold (e.g., 0.001). Compare the energy efficiency and accuracy metrics (RMSE, MAE) with the baseline early stopping method.",
         "Interestingness": 9,
         "Feasibility": 8,
         "Novelty": 8,
         "novel": true
     },
     {
-        "Name": "sparse_aware_sgd",
-        "Title": "Sparse-Aware SGD for Energy-Efficient Matrix Factorization",
-        "Experiment": "Introduce a sparse detection mechanism in the update_parameters function to identify and skip or reduce the frequency of updates for sparse or low-significance interactions. Implement a heuristic to detect sparse interactions based on interaction counts or data density. Specifically, interactions with counts below a predefined threshold will be considered sparse. Modify the update_parameters function to include logic for adaptive updates, skipping updates for detected sparse interactions or applying a reduced update frequency. Extend the logging functionality in the sgd function to include energy metrics (training time, memory usage) alongside performance metrics (RMSE, MAE). Evaluate the impact on model performance and energy efficiency by comparing with the original implementation.",
-        "Interestingness": 10,
+        "Name": "svd_initialization",
+        "Title": "Low-Rank SVD Initialization for Energy-Efficient Matrix Factorization",
+        "Experiment": "Modify the `main` function to include an initial low-rank approximation of the user-item interaction matrix using truncated Singular Value Decomposition (SVD) with `scipy.sparse.linalg.svds`. Use the resulting matrices to initialize the user and item latent factors before performing stochastic gradient descent (SGD). Ensure the integration is seamless by matching the dimensions of the SVD matrices with the expected latent factor dimensions. Compare the energy efficiency and model performance (RMSE, MAE) with the baseline model that uses random initialization for the latent factors. Evaluate energy efficiency improvements by measuring training time and computational resource usage.",
+        "Interestingness": 9,
         "Feasibility": 8,
         "Novelty": 9,
         "novel": true
     },
     {
-        "Name": "cluster_aware_sgd",
-        "Title": "Cluster-Aware SGD for Energy-Efficient Matrix Factorization",
-        "Experiment": "Introduce a clustering step before matrix factorization. First, cluster users and items based on their interaction patterns using K-means clustering due to its simplicity and speed. Use the obtained clusters to modify the update_parameters function, such that updates are performed within clusters. Specifically, update the latent factors for users and items within the same cluster more frequently. Evaluate the clustering quality using metrics like silhouette score, and assess the impact on model performance using RMSE and MAE, and measure energy efficiency using training time and memory usage.",
+        "Name": "parallel_sgd",
+        "Title": "Hybrid Parallelism for Energy-Efficient Matrix Factorization",
+        "Experiment": "Implement hybrid parallelism (data and model parallelism) in the `sgd` and `update_parameters` functions using parallel processing libraries like `joblib` or `multiprocessing`. Distribute the workload of updating user and item latent factors across multiple cores. Apply parallelism to the loops within the `update_parameters` function and the validation loop in the `validation_loss` function. Profile the code before and after parallelism implementation to identify bottlenecks and measure performance gains. Measure the impact on training time, computational energy usage using time and power monitoring tools, and model performance (RMSE, MAE). Compare the results with the baseline model to assess improvements in energy efficiency and accuracy.",
         "Interestingness": 9,
-        "Feasibility": 7,
-        "Novelty": 8,
-        "novel": true
-    },
-    {
-        "Name": "hybrid_matrix_factorization",
-        "Title": "Hybrid Matrix Factorization: Integrating Collaborative and Content-Based Filtering",
-        "Experiment": "Assume synthetic content features are generated for users and items. Modify the update_parameters and predict functions to incorporate these content-based features. Evaluate the impact on model performance (RMSE, MAE) and energy efficiency (training time, memory usage). Log and compare these metrics before and after integration to assess improvements.",
-        "Interestingness": 10,
         "Feasibility": 7,
         "Novelty": 9,
         "novel": true
+    },
+    {
+        "Name": "quantized_matrix_factorization",
+        "Title": "Quantized Matrix Factorization for Energy-Efficient Recommender Systems",
+        "Experiment": "Modify the `update_parameters` function to incorporate quantization of the latent factors and biases immediately after each parameter update during the SGD process. Implement different quantization levels (e.g., 8-bit, 16-bit) and compare their impact on model performance (RMSE, MAE) and energy efficiency (training time, memory usage). Specifically, after each update to bias_user, bias_item, factors_user, and factors_item, apply the specified quantization level. Evaluate the trade-offs between accuracy and energy efficiency by conducting experiments with varying quantization levels and comparing the results with the baseline model.",
+        "Interestingness": 9,
+        "Feasibility": 7,
+        "Novelty": 8,
+        "novel": false
     }
 ]
